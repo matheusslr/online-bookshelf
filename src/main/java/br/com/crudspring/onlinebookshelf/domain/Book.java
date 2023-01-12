@@ -1,6 +1,5 @@
 package br.com.crudspring.onlinebookshelf.domain;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,8 +25,15 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private LocalDate publishDate;
+    private Integer publishDate;
+    private String publishers;
+    private String language;
+    private Integer numberPages;
+    private Long isbn;
 
+    @Size(max = 1000)
+    private String description;
+    
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;

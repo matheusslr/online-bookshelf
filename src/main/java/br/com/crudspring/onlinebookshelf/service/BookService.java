@@ -33,7 +33,6 @@ public class BookService {
 
     public Book save(BookPostRequestBody bookPostRequestBody) {
         Book book = BookMapper.INSTANCE.toBook(bookPostRequestBody);
-        book.setPublishDate(LocalDate.now());
         Optional<Author> authors = authorRepository.findById(bookPostRequestBody.getAuthorId());
         authors.ifPresent(book::setAuthor);
         return bookRepository.save(book);
