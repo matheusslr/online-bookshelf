@@ -2,6 +2,9 @@ package br.com.crudspring.onlinebookshelf.domain;
 
 import java.util.Set;
 
+import org.hibernate.boot.jaxb.hbm.internal.RepresentationModeConverter;
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -22,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Book {
+public class Book extends RepresentationModel<Book>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -2,6 +2,8 @@ package br.com.crudspring.onlinebookshelf.domain;
 
 import java.util.Set;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -21,10 +23,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Author {
+public class Author extends RepresentationModel<Author>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
 
     @OneToMany(mappedBy = "author")

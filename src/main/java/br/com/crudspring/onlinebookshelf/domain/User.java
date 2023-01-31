@@ -2,6 +2,8 @@ package br.com.crudspring.onlinebookshelf.domain;
 
 import java.util.Set;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user_table")
-public class User {
+public class User extends RepresentationModel<User>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -3,16 +3,20 @@ package br.com.crudspring.onlinebookshelf.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.crudspring.onlinebookshelf.domain.User;
 import br.com.crudspring.onlinebookshelf.requests.UserPostRequestBody;
+import br.com.crudspring.onlinebookshelf.requests.UserPutRequestBody;
 import br.com.crudspring.onlinebookshelf.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -41,5 +45,17 @@ public class UserController {
     @Transactional
     public ResponseEntity<User> save(@RequestBody @Valid UserPostRequestBody userPostRequestBody){
         return new ResponseEntity(userService.save(userPostRequestBody), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody @Valid UserPutRequestBody userpPutRequestBody){
+        userService.replace(userpPutRequestBody);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        userService.remove(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

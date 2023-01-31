@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.crudspring.onlinebookshelf.domain.Author;
+import jakarta.validation.ConstraintViolationException;
 
 @DataJpaTest
 @DisplayName("Test for Author Repository")
@@ -47,6 +49,15 @@ public class AuthorRepositoryTest {
         assertNotNull(authorUpdated.getName());
         assertEquals(authorUpdated.getName(), authorSaved.getName());
         assertEquals(authorUpdated.getId(), authorSaved.getId());
+    }
+
+
+    @Test
+    @DisplayName("Save throw Constraint Violation Exception when name is Empty")
+    void save_ThrowsConstraintViolationException_WhenNameIsEmpty(){
+        Author author = new Author();
+
+        assertThrows(ConstraintViolationException.class, () -> this.authorRepository.save(author));
     }
 
     @Test

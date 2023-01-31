@@ -26,7 +26,7 @@ public class ISBNValidatorTest {
 
     @Test
     @DisplayName("Validated ISBN when Format is Correct")
-    public void isValid_ValidateISBN_WhenSucessfull(){
+    public void isValid_ValidateISBN_WhenFormatIsCorrect(){
         Long isbnValid = createValidISBN();
         Long isbnInvalid = createInvalidISBN();
 
